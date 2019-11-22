@@ -1,0 +1,51 @@
+global key;
+InitKeyboard();
+ brick.SetColorMode(3, 4);
+ leftSpeed = 40;
+ rightSpeed = 40;
+while 1
+    pause(0.1);
+   
+    
+   
+    switch key
+        
+        case 'uparrow'
+            brick.MoveMotor('A', rightSpeed);
+            brick.MoveMotor('D', rightSpeed);
+        case 'downarrow'
+            brick.MoveMotor('A', -rightSpeed);
+            brick.MoveMotor('D', -rightSpeed);
+        case 'rightarrow'
+            brick.MoveMotor('A', 0);
+            brick.MoveMotor('D', rightSpeed); 
+        case 'leftarrow'
+            brick.MoveMotor('A', rightSpeed);
+            brick.MoveMotor('D', 0);
+        case 'p'
+           
+            brick.MoveMotor('C',10);
+            pause(.25);
+            brick.StopMotor('C');
+        case 's'
+            brick.StopMotor('A');
+            brick.StopMotor('D');
+        case 'o'
+           brick.MoveMotor('C',-10);
+            pause(.25);
+            brick.StopMotor('C');
+        case 'i'
+           brick.MoveMotor('A', -10);
+           brick.MoveMotor('D', -10);
+            pause(.25);
+            brick.StopMotor('A');
+             brick.StopMotor('D');
+        case 'q'
+            brick.StopMotor('A');
+            brick.StopMotor('D');
+            brick.StopMotor('C');
+            break;
+            
+    end
+end
+CloseKeyboard();
