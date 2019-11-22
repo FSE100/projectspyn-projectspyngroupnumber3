@@ -1,0 +1,70 @@
+brick.SetColorMode(3, 2);
+passenger = false;
+while(1)
+   leftSpeed = 53.35;
+   rightSpeed = 50;
+   touch1 = brick.TouchPressed(4);
+   touch2 = brick.TouchPressed(1);
+   color = brick.ColorCode(3); 
+   distance = brick.UltrasonicDist(2);
+   brick.MoveMotor('A', rightSpeed)
+   brick.MoveMotor('D', leftSpeed)
+   
+   if(distance > 40)
+       pause(.25)
+       brick.StopMotor('D');
+       brick.StopMotor('A');
+       pause(.3);
+      %brick.MoveMotor('D', -leftSpeed)
+       brick.MoveMotor('A', rightSpeed)
+       pause(1.465)
+       qbrick.MoveMotor('D', leftSpeed)
+       brick.MoveMotor('A', rightSpeed)
+       pause(1.2)
+   end
+   %Detects if color is red, stops for 3 seconds if it is then continues
+   %for 5
+   %red
+   if(color == 5)
+       brick.beep();
+       brick.StopMotor('A')
+       brick.StopMotor('D')
+       pause(3)
+       brick.MoveMotor('A', rightSpeed)
+       brick.MoveMotor('D', leftSpeed)
+       pause(.2)
+   end
+   
+   %blue
+   if(color == 3)
+       brick.StopMotor('A')
+       brick.StopMotor('D')
+       Control();
+       
+   end
+
+   %green   
+   if(color == 3)
+       %dropoff code to be written
+       brick.beep();
+       brick.StopMotor('A');
+       brick.StopMotor('D');
+       brick.beep();
+       Control();
+   end
+   
+   %if touch sensor hits wall
+    if touch1 || touch2
+        pause(.25)
+        brick.beep();
+        brick.StopMotor('A');
+        brick.StopMotor('D');
+        brick.MoveMotor('A', -rightSpeed);
+        brick.MoveMotor('D', -leftSpeed);
+        pause(1.5);
+        brick.StopMotor('A');
+        %brick.MoveMotor('A', -rightSpeed);
+        brick.MoveMotor('D', leftSpeed+2);
+        pause(1.13)
+    end
+end
